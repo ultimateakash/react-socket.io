@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';  
+import { Col, Row } from 'reactstrap';
 import { SocketContext } from '../../context/socket';
 import ViewComponent from './view.component';
 
@@ -28,35 +29,37 @@ const ListComponent = () => {
     }
 
     return (
-        <>
-            <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        actors.map((actor, index) => {
-                            return (
-                                <tr key={index}>
-                                    <th>{actor.id}</th>
-                                    <td>{actor.name}</td>
-                                    <td>{actor.age}</td>
-                                    <td>
-                                        <button className="btn btn-primary btn-sm" onClick={() => fetchMovies(actor)}>View</button>
-                                    </td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
-            {  modal  && <ViewComponent show={modal} actor={actor} onClose={setModal}/> }   
-        </>
+        <Row>
+            <Col md={{ size: 8, offset: 2 }}>
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            actors.map((actor, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <th>{actor.id}</th>
+                                        <td>{actor.name}</td>
+                                        <td>{actor.age}</td>
+                                        <td>
+                                            <button className="btn btn-primary btn-sm" onClick={() => fetchMovies(actor)}>View</button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                {  modal  && <ViewComponent show={modal} actor={actor} onClose={setModal}/> }
+            </Col>
+        </Row>
     );
 }
 
