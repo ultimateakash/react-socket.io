@@ -1,4 +1,4 @@
-const { fetchtActors, fetchMovies } = require('./handler');
+const { fetchMovies, addMovie, updateMovie, deleteMovie } = require('../controllers/movie.controller');
 
 module.exports = (io) => {
 
@@ -6,11 +6,15 @@ module.exports = (io) => {
 
         console.log('new connection');
 
-		socket.on('fetchtActors', () => fetchtActors(socket));
+		socket.on('fetchMovies', () => fetchMovies(socket));
+        
+        socket.on('addMovie', (data) => addMovie(socket, data));
 
-        socket.on('fetchMovies', (actor) => fetchMovies(socket, actor));
+        socket.on('updateMovie', (data) => updateMovie(socket, data));
 
+        socket.on('deleteMovie', (id) => deleteMovie(socket, id));
+        
 		socket.on('disconnect', () => console.log('disconnected')); 
 		
-	});
+	})
 }

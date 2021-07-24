@@ -1,6 +1,6 @@
 import './App.css';
 import HeaderComponent from './components/comman/header.component';
-import ListComponent from './components/pages/list.component';
+import ListComponent from './components/pages/movies/list.component';
 import { socket, SocketContext } from './context/socket';
 
 function App() {
