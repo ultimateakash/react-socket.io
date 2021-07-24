@@ -33,7 +33,7 @@ const ListComponent = () => {
     return (
         <>
             <Row>
-                <Col className="mb-3 mt-3 text-end" md={{ size: 8, offset: 2 }}>
+                <Col className="mb-1 mt-1 text-end" md={{ size: 8, offset: 2 }}>
                     <button className="btn btn-primary btn-sm" onClick={handleModal}>Add Movie</button>
                 </Col>
             </Row>
