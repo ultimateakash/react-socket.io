@@ -18,9 +18,8 @@ const ListComponent = () => {
         return () => socket.disconnect();
     }, [])
 
-    const handleModal = (event, movie) => { 
-        const actionType = event.target.getAttribute('rel');
-        if(actionType === 'edit') {
+    const handleModal = (movie) => {  
+        if(movie) {
             setMovieDetail(movie)
         }
         setModal(true);
@@ -30,11 +29,16 @@ const ListComponent = () => {
         socket.emit('deleteMovie', movie.id);
     }
 
+    const handleClose = () => { 
+        setModal(false);
+        setMovieDetail(null)
+    }
+
     return (
         <>
             <Row>
                 <Col className="mb-1 mt-1 text-end" md={{ size: 8, offset: 2 }}>
-                    <button className="btn btn-primary btn-sm" onClick={handleModal}>Add Movie</button>
+                    <button className="btn btn-primary btn-sm" onClick={() => handleModal()}>Add Movie</button>
                 </Col>
             </Row>
             <Row>
@@ -59,7 +63,7 @@ const ListComponent = () => {
                                             <td>{movie.category}</td>
                                             <td><span className="badge bg-warning text-dark">{movie.rating}</span></td>
                                             <td>
-                                                <button className="btn btn-primary btn-sm me-2" onClick={(event) => handleModal(event, movie)} rel="edit">Edit</button>
+                                                <button className="btn btn-primary btn-sm me-2" onClick={() => handleModal(movie)}>Edit</button>
                                                 <button className="btn btn-danger btn-sm" onClick={() => handleDelete(movie)}>Delete</button>
                                             </td>
                                         </tr>
@@ -74,10 +78,7 @@ const ListComponent = () => {
                         <FormComponent 
                             show={modal} 
                             movie={movieDetail} 
-                            onClose={(e) => {
-                                setModal(e);
-                                setMovieDetail(null)
-                            }}
+                            onClose={handleClose}
                         />
                     }
                 </Col>
